@@ -15,7 +15,7 @@ function LongPulling() {
 
     const subscribe = async() => {
         try {
-           const {data} = await axios.get('http://localhost:5000/api/message/get-message');
+           const {data} = await axios.get('https://server-task6.onrender.com/api/message/get-message');
            setMessages(prev => [data.message, ...prev]);
             await subscribe();
         } catch(e) {
@@ -26,7 +26,7 @@ function LongPulling() {
     }
 
     const sendMessage = async()=> {
-        await axios.post('http://localhost:5000/api/message/new-message', {
+        await axios.post('https://server-task6.onrender.com/api/message/new-message', {
             message: value,
             tag: 'Comment'
         })
