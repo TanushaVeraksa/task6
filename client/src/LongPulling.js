@@ -47,13 +47,13 @@ const LongPulling = () => {
     }
 
     const sendMessage = async() => {
-        if(!auto.includes(inputTag) && inputTag !== '') {
+        if(!auto.includes(inputTag) && inputTag !== '' && inputTag !== null) {
             setAuto(prev => [...prev, inputTag])
         }
         if(!auto.includes(tag) && tag !== '') {
             setAuto(prev => [...prev, tag])
         }
-        if(inputTag === '') {
+        if(inputTag === '' || inputTag == null) {
             await axios.post(url + '/api/message/new-message', {
                 message: value,
                 tag: tag
@@ -64,8 +64,6 @@ const LongPulling = () => {
                 tag: inputTag
             })
         }
-        setValue('')
-        setTag('')
     }
     const handleChange = (event, value) => {
         if(!selected.includes(value) && value !== null) {
@@ -91,9 +89,9 @@ const LongPulling = () => {
             />
             {selected.map(elem => 
             elem !== '' &&
-            <div>
+            <div key={elem}>
             <Button
-            className="mb-2"
+                className="mb-2"
                 variant="outline-primary"
                 onClick={handleDelete}
                 value={elem}
